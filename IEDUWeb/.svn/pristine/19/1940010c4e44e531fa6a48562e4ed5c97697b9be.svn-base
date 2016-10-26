@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+ 
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>JSP</title>
+</head>
+<body>
+	<a href="http://localhost:8080/IEDUWeb/P_0705/SurveyMain.jsp">설문조사</a><br>
+	<%--
+		현재 index는 http://localhost:8080/IEDUWeb/index.jsp
+		목적지는 	 http://localhost:8080/IEDUWeb/P_0706/LoginForm.jsp --%>
+	<a href="./P_0706/LoginForm.jsp">로그인</a>
+</body>
+</html>

@@ -1,0 +1,55 @@
+package com.iedu.reboard;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.iedu.common.IEDUMain;
+import com.iedu.data.ReBoardData;
+import com.iedu.sql.ReBoardDAO;
+
+public class BoardView implements IEDUMain {
+	public String ieduExe(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 할일
+		// 1. 넘어온 파라메터 받는다.
+		String strNo = req.getParameter("rbno");
+		int rbno = 0;
+		try {
+			rbno = Integer.parseInt(strNo);
+		} catch (Exception e) {
+			// 혹시라도 숫자로 변화시키지 못하면 잘못된 것이므로....
+			// 거기에 맞는 조치를 해야한다.
+			// 예> 메인으로 내보내던지............
+		}
+
+		// 2. 이 번호를 이용해서 데이터베이스에서 글의 내용을 꺼낸다.
+		ReBoardDAO dao = new ReBoardDAO();
+		ResultSet rs = dao.getView(rbno);
+
+		// 3. 이 내용을 뷰에게 전달할 준비를 한다.
+		// 데이터 빈 클래스로 데이터를 묶어서 전달하기로 한다.
+		ReBoardData data = new ReBoardData();
+		try {
+			rs.next();
+			data.setNo(rs.getInt("NO"));
+			data.setTitle(rs.getString("TITLE"));
+			data.setWriter(rs.getString("WRITER"));
+			data.setBody(rs.getString("BODY"));
+			data.setDate(rs.getDate("WDAY"));
+			data.setHit(rs.getInt("HIT"));
+			data.setGood(rs.getInt("GOOD"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dao.close();
+		}
+		// 4. 뷰에게 데이터(모델)를 준다.
+		req.setAttribute("DATA", data);
+		
+		// 5. 뷰를 불러온다.
+		return "../IEDU/ReBoard/BoardView.jsp";
+	}
+}

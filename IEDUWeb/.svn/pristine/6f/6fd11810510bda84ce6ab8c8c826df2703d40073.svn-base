@@ -1,0 +1,20 @@
+package QNA;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Common.QNAMain;
+
+// 이것에 컨트롤러 역할을 하기 위해서는 우리는 QNAMain을 상속 받아서
+// 만들기로 약속했다.
+public class QNAList implements QNAMain {
+	public String execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 물론 여기서 할 일은 많지만... 이과정은 내일하기로 했고
+		// 오늘은 단순히 뷰만 호출하자.
+		return "../QNA/QNAList.jsp";
+	}
+}

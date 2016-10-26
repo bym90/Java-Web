@@ -1,0 +1,31 @@
+package com.iedu.reboard;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.iedu.common.IEDUMain;
+import com.iedu.sql.ReBoardDAO;
+
+public class GoodProc implements IEDUMain {
+	public String ieduExe(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 파라메터 받기
+		String strNo = req.getParameter("rbno");
+		int rbno = Integer.parseInt(strNo);
+		String strPage = req.getParameter("nowPage");
+		int nowPage = Integer.parseInt(strPage);
+		// 데이터베이스에서 추천수 증가하기
+		ReBoardDAO dao = new ReBoardDAO();
+		dao.updateGood(rbno);
+		dao.close();
+		// 뷰에서 필요한 데이터 모델로 보내기
+		// 뷰에서는 보여줄 내용이 없고 다시 상세보기로 가야하니까...
+		// 뷰에서 사용할 파라메터 2개를 보내자.
+		req.setAttribute("RBNO", rbno);
+		req.setAttribute("NOWPAGE", nowPage);
+		// 뷰 부르기
+		return "../IEDU/ReBoard/GoodProc.jsp";
+	}
+}

@@ -1,0 +1,51 @@
+package com.iedu.reboard;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.iedu.common.IEDUMain;
+
+public class BoardList implements IEDUMain {
+	public String ieduExe(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 반환값
+		// 이 클래스는 컨트롤러의 역할을 할 예정이고 이 다음에는 뷰를 실행해야 한다.
+		// 뷰는 물론 하나로 고정할 수도 있지만...
+		// 컨트롤러가 실행하는 과정에 따라서 뷰가 바뀔 수도 있다.
+		// 예> 에러가 발생하면 다른 뷰를 사용해야 한다.
+		// 로그인에 성공 여부에 따라서 보여주는 뷰는 다를 수 있다.
+		// 뷰를 하나로 고정하지 않고 반환값을 이용해서 뷰를 선택하도록 한것이다.
+		// 매개변수의 의미
+		// 이 컨트롤러는 요청을 한 경우 실행하는 프로그램이다.
+		// 요청의 내용이나 응답에 관련된 내용을 알아야 할 것이다.
+		// 그래서 요청과 응답을 관리하는 클래스를 매개변수로 받아서 사용하기 위해서
+		
+		// 파라메터 받는다.
+		String strPage = req.getParameter("nowPage");
+		// 선택 파라메터는 받았을 때와 받지 않았을 경우를 반드시 구분해서 처리해 주어야 한다.
+		int nowPage = 0;
+		if(strPage ==  null || strPage.length() == 0) {
+			// 받지 못했으면
+			// 나는 클라이언트가 몇 페이지를 보여달라고 하지 않으면...
+			// 무조건 1페이지를 보여줄 생각이다.
+			nowPage = 1;
+		}
+		else {
+			// 받았으면
+			// 받는 데이터(페이지)를 숫자로 변환해 놓아야 한다.
+			try {
+				nowPage = Integer.parseInt(strPage);
+			} catch (Exception e) {
+				nowPage = 1;
+				e.printStackTrace();
+			}
+		}
+		// 이제 데이터베이스에서 데이터를 꺼내야 한다. (이것은 다음에 하자.)
+		
+		// 이제 뷰를 부른다.
+		return "../IEDU/ReBoard/BoardList.jsp";
+	}
+	
+}

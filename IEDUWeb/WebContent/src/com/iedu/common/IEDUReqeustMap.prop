@@ -1,0 +1,79 @@
+# 이 파일은 Properties 클래스가 읽어서 Map으로 만들기 위해서
+# 작성하는 파일이다.
+# 이런 properties를 위한 파일을 Properties 파일이라고 한다.
+# 이 파일에는 규칙
+# 1. #으로 시작하는 줄은 주섟문으로 판정하여 Properties 클래스가 읽지 않는다.
+# 2. 내용은 키값과 데이터로 구분되는 한줄씩 입력해야 한다.
+#	 즉, 한줄의 내용을 읽어서 하나의 데이터로 간주하게 된다.
+# 3. 입력 문법 키값=데이터의 형태로 입력해야 하며 = 좌우에는 공백이 있으면 안된다.
+# 예> /Login/LoginForm.kim=Login.LoginForm
+################################################# 댓글형 게시판 요청
+# 목록 보기 요청
+/ReBoard/BoardList.bmw=com.iedu.reboard.BoardList
+# 글쓰기 폼 요청
+/ReBoard/BoardWriteForm.bmw=com.iedu.reboard.BoardWriteForm
+# 글쓰기 처리 요청
+/ReBoard/BoardWriteProc.bmw=com.iedu.reboard.BoardWriteProc
+# 상세보기 요청
+/ReBoard/BoardView.bmw=com.iedu.reboard.BoardView
+# 답글 쓰기 요청
+/ReBoard/ReplyProc.bmw=com.iedu.reboard.ReplyProc
+# 게시물 수정 폼 요청
+/ReBoard/BoardModifyForm.bmw=com.iedu.reboard.BoardModifyForm
+# 게시물 수정요청
+/ReBoard/BoardModifyProc.bmw=com.iedu.reboard.BoardModifyProc
+# 댓글 수정 하기 요청
+/ReBoard/ReplyModifyProc.bmw=com.iedu.reboard.ReplyModifyProc
+# 추천하기
+/ReBoard/GoodProc.bmw=com.iedu.reboard.GoodProc
+# 삭제하기
+/ReBoard/ReplyDelete.bmw=com.iedu.reboard.ReplyDelete
+# 원글삭제 요청
+/ReBoard/BoardDelete.bmw=com.iedu.reboard.BoardDelete
+
+
+
+################################################## 답글형 게시판 요청
+# 목록보기 요청
+/AnBoard/BoardList.bmw=com.iedu.anboard.BoardList
+# 글쓰기 폼 요청
+/AnBoard/WriteForm.bmw=com.iedu.anboard.WriteForm
+# 글쓰기 요청
+/AnBoard/WriteProc.bmw=com.iedu.anboard.WriteProc
+# 조회수 증가 요청
+/AnBoard/BoardHit.bmw=com.iedu.anboard.BoardHit
+# 상세보기 요청
+/AnBoard/BoardView.bmw=com.iedu.anboard.BoardView
+# 답글쓰기 폼 요청
+/AnBoard/AnWriteForm.bmw=com.iedu.anboard.AnWriteForm
+# 답글쓰기 요청
+/AnBoard/AnWriteProc.bmw=com.iedu.anboard.AnWriteProc
+# 수정하기 폼 요청
+/AnBoard/ModifyForm.bmw=com.iedu.anboard.ModifyForm
+# 수정하기 요청
+/AnBoard/ModifyProc.bmw=com.iedu.anboard.ModifyProc
+# 삭제하기 요청
+/AnBoard/DeleteProc.bmw=com.iedu.anboard.DeleteProc
+# 좋아요, 나빠요 요청
+/AnBoard/GoodBadProc.bmw=com.iedu.anboard.GoodBadProc
+# 검색하기 요청
+/AnBoard/BoardSearch.bmw=com.iedu.anboard.BoardSearch
+
+
+
+########################################## Ajax 뉴스보기 요청
+/Ajax/AjaxNews02.bmw=com.iedu.ajax.AjaxNews02
+
+
+
+########################################## 파일 첨부 게시판 요청
+# 목록보기 요청
+/FileBoard/BoardList.bmw=com.iedu.fileboard.BoardList
+# 글쓰기 폼 요청
+/FileBoard/BoardWriteForm.bmw=com.iedu.fileboard.BoardWriteForm
+# 글쓰기 요청
+/FileBoard/BoardWriteProc.bmw=com.iedu.fileboard.BoardWriteProc
+# 상세보기 요청
+/FileBoard/BoardView.bmw=com.iedu.fileboard.BoardView
+# 파일다운로드 요청
+/FileBoard/FileDownload.bmw=com.iedu.fileboard.FileDownload

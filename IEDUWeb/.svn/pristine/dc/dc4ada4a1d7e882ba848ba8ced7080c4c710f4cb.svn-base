@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ 
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel=stylesheet href=../Base.css>
+<title>JSP</title>
+</head>
+<body>
+<%-- 목록 보여주고--%>
+
+<%-- 부가 기능을 할 하이퍼링크를 만들자. --%>
+	<table class="TABLESTYLE2">
+		<tr>
+			<td align="right">
+				<a href="../ReBoard/BoardWriteForm.bmw" class="A">글쓰기</a>
+<%--	
+		하이퍼링크(<a>)는 원칙적으로 href 속성에 있는 요청을 GET 방식으로 
+		하는 것이다.
+ --%>
+			</td>
+		</tr>
+	</table>
+ 
+</body>
+</html>

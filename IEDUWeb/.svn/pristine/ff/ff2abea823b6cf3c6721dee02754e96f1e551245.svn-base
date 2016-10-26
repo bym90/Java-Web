@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+    <script>
+	function Show(){
+	var max = Math.max(1,2,3,4,5);
+	var result = document.getElementById("test").innerHTML = "결과 = " + max;
+	}
+    </script>
+    <p id="test"></p>
+	<input type="button" value="Click" onClick="Show()">
+ </body>
+</html>

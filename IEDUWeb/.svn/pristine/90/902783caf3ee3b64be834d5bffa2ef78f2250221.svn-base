@@ -1,0 +1,29 @@
+package com.iedu.sql;
+
+/*
+ *  이 클래스가 하는 일은 질의명령을 모아서 관리하고 필요하면
+ *  질의 명령을 제공하는 클래스이다.
+ */
+public class ReBoardSQL {
+	public static String getSQL(int code) {
+	// static을 시키는 이유은 new시키기 귀찮아서
+		// code는 각각의 질의명령 마다 번호를 붙여서
+		// 내가 필요한 질의 명령의 번호를 알려주면 그 번호에 해당하는
+		// 질의명령을 알려주기 위한 값이다.
+		StringBuffer buff = new StringBuffer();
+		switch (code) {
+		case 2101:
+			buff.append("INSERT ");
+			buff.append("INTO ");
+			buff.append("REBOARD ");
+			buff.append("VALUES ");
+			buff.append("((SELECT NVL(MAX(rb_NO),0) + 1 FROM REBOARD), ");
+			buff.append("?,?,?, SYSDATE, 0, 0, '0') ");
+			break; 
+			// 다른질의 명령이 필요하면
+			// case 코드값...
+		}
+		return buff.toString();
+	}
+	
+}

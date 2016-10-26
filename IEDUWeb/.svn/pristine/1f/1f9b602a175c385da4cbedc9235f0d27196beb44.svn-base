@@ -1,0 +1,14 @@
+package Guest;
+
+import javax.servlet.http.*;
+
+public class GuestWrite {
+	public String writeProc(HttpServletRequest req, HttpServletResponse resp) {
+		// 현재 요청
+		// http://localhost:8080/IEDUWeb/Guest/GuestWrite.do
+		// 뷰 문서 요청
+		// http://localhost:8080/IEDUWeb/Guest/GuestWrite.jsp
+		// 를 비교해서 상대 주소를 알아낸다.
+		return "../Guest/GuestWrite.jsp";
+	}
+}

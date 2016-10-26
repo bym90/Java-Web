@@ -1,0 +1,108 @@
+package com.iedu.reboard;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.iedu.common.IEDUMain;
+import com.iedu.data.ReBoardData;
+import com.iedu.sql.ReBoardDAO;
+import com.iedu.util.PageInfo;
+
+public class BoardList implements IEDUMain {
+	public String ieduExe(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 반환값
+		// 이 클래스는 컨트롤러의 역할을 할 예정이고 이 다음에는 뷰를 실행해야 한다.
+		// 뷰는 물론 하나로 고정할 수도 있지만...
+		// 컨트롤러가 실행하는 과정에 따라서 뷰가 바뀔 수도 있다.
+		// 예> 에러가 발생하면 다른 뷰를 사용해야 한다.
+		// 로그인에 성공 여부에 따라서 보여주는 뷰는 다를 수 있다.
+		// 뷰를 하나로 고정하지 않고 반환값을 이용해서 뷰를 선택하도록 한것이다.
+		// 매개변수의 의미
+		// 이 컨트롤러는 요청을 한 경우 실행하는 프로그램이다.
+		// 요청의 내용이나 응답에 관련된 내용을 알아야 할 것이다.
+		// 그래서 요청과 응답을 관리하는 클래스를 매개변수로 받아서 사용하기 위해서
+
+		// 파라메터 받는다.
+		String strPage = req.getParameter("nowPage");
+		// 선택 파라메터는 받았을 때와 받지 않았을 경우를 반드시 구분해서 처리해 주어야 한다.
+		int nowPage = 0;
+		if (strPage == null || strPage.length() == 0) {
+			// 받지 못했으면
+			// 나는 클라이언트가 몇 페이지를 보여달라고 하지 않으면...
+			// 무조건 1페이지를 보여줄 생각이다.
+			nowPage = 1;
+		} else {
+			// 받았으면
+			// 받는 데이터(페이지)를 숫자로 변환해 놓아야 한다.
+			try {
+				nowPage = Integer.parseInt(strPage);
+			} catch (Exception e) {
+				nowPage = 1;
+				e.printStackTrace();
+			}
+		}
+		// 페이지 나눔 기능을 위해서는 뷰에게 페이지 나눔 기능을 위한 정보를
+		// 만들어서 제공해야 한다.
+		// 이때 2가지 정보는 필수로 제공하기로 했다.
+		// 1. 보고싶은 페이지
+		// 2. 총 데이터갯수
+		ReBoardDAO dao = new ReBoardDAO();
+		int total = dao.getTotal();
+		// 페이지 정보를 만들 수 있다.
+		PageInfo pInfo = new PageInfo(nowPage, total);
+		
+		// 이제 데이터베이스에서 데이터를 꺼내야 한다. (이것은 다음에 하자.)
+		// 원래는 페이지 나눔 기능을 이용해서 꺼내야 하는데...
+		// 일단은 몽땅 꺼내서 보여주기를 먼저하자.
+		
+		ResultSet rs = dao.getList();
+		// 여러 줄이 나올것이므로 이줄을 하나로 묶을 컬렉션이다.
+		// 전체를 꺼내고
+		ArrayList list = new ArrayList();
+		// 이제는 그 페이지에 필요한 것만 꺼내서 보여주도록 해야한다.
+		// 먼저 이전 페이지에서 나와야 할 내용은 버리자.
+		for (int i = 0; i < (pInfo.getNowPage()-1) * pInfo.getPageList(); i++) {
+			try {
+				// 원하는 데이터가 있는 곳까지 스킵시킨다!!
+				rs.next();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+//			while (rs.next()) {
+				// 이제는 그다음 5개만 꺼내야 하낟.
+			for (int i = 0; i < pInfo.getPageList() && rs.next(); i++) {
+				// 한줄씩 꺼낸 데이터를 한번에 묶겠다.
+				// 데이터를 묶을 데이터빈 클래스가 필요하겠따.
+				ReBoardData data = new ReBoardData();
+				data.setNo(rs.getInt("NO"));
+				data.setTitle(rs.getString("TITLE"));
+				data.setWriter(rs.getString("WRITER"));
+				data.setDate(rs.getDate("WDAY"));
+				data.setHit(rs.getInt("HIT"));
+				// 이런 데이터가 여러개 나올 것이다.
+				// 여러개의 줄을 다시 합쳐야 할 것이다 => 컬렉션을 이용
+				list.add(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dao.close();
+		}
+
+		// 뷰를 부르기 전에 뷰에게 컨트롤러가 생상한 데이터를 전달한다.
+		// 컨트롤러가 생산한 데이터를 모델이라고 부른다.
+		req.setAttribute("LIST", list);
+		req.setAttribute("PINFO", pInfo);
+
+		// 이제 뷰를 부른다.
+		return "../IEDU/ReBoard/BoardList.jsp";
+	}
+
+}

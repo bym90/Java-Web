@@ -1,0 +1,159 @@
+package com.iedu.sql;
+/*
+ * 답변형 게시판에서 사용할 질의 명령만 관리할 클래스이다.
+ */
+public class AnBoardSQL {
+	// 일련번호 알아내기 1101
+	// 이 번호에 별칭을 붙여주자.
+	public static final int SELECT_MAXNO = 1101;
+	// 데이터 입력 2101
+	public static final int INSERT_BOARD = 2101;
+	// 총 데이터 개수 구하기 1201
+	public static final int GET_TOTAL = 1201;
+	// 목록 보기 구하기 1301
+	public static final int SELECT_LIST = 1301;
+	// 조회수 증가 질의 3101
+	public static final int UPDATE_HIT = 3101;
+	// 상세보기 질의 1401
+	public static final int SELECT_VIEW = 4101; 
+	// Order 수정 질의 3201
+	public static final int UPDATE_ORDER = 3201;
+	// 비밀번호 확인 질의 1501
+	public static final int CHECK_PASSWORD = 1501;
+	// 게시물 수정 질의 3301
+	public static final int UPDATE_BOARD = 3301;
+	// 삭제 질의 3401
+	public static final int DELETE_BOARD = 3410;
+	public static String getSQL(int code) {
+		StringBuffer buff = new StringBuffer();
+		switch(code){
+		case SELECT_MAXNO:
+			buff.append("SELECT	");
+			buff.append("	NVL(MAX(ab_NO), 0) + 1 AS MAXNO ");
+			buff.append("FROM ");
+			buff.append("	AnBoard ");
+			break;
+		case INSERT_BOARD:
+			buff.append("INSERT	");
+			buff.append("INTO ");
+			buff.append("	AnBoard ");
+			buff.append("VALUES ");
+			buff.append("	 (?,?,?,?,SYSDATE,?,0,0,0,'0',?,?,?) ");
+			break;
+		case GET_TOTAL:
+			buff.append("SELECT ");
+			buff.append("	COUNT(*) AS TOTAL ");
+			buff.append("FROM ");
+			buff.append("	AnBoard ");
+			buff.append("WHERE ");
+			buff.append("	ab_IsShow='0' ");
+			break;
+		case SELECT_LIST:
+//			buff.append("SELECT ");
+//			buff.append("	* ");
+//			buff.append("FROM ");
+//			buff.append("	(SELECT ");
+//			buff.append("		rownum AS RNO, ");
+//			buff.append("		NO, WRITER, TITLE, WDAY, HIT, LGROUP, LSTEP, LORDER ");
+//			buff.append("	FROM ");
+//			buff.append("		(select ");
+//			buff.append("			rownum, ");
+//			buff.append("			ab_no AS NO, ");
+//			buff.append("			ab_Writer AS WRITER, ");
+//			buff.append("			ab_Title AS TITLE, ");
+//			buff.append("			ab_Date AS WDAY, ");
+//			buff.append("			ab_Hit AS HIT, ");
+//			buff.append("			ab_Group AS LGROUP, ");
+//			buff.append("			ab_Step AS LSTEP, ");
+//			buff.append("			ab_Order AS LORDER ");
+//			buff.append("		FROM ");
+//			buff.append("			AnBoard ");
+//			buff.append("		WHERE ");
+//			buff.append("			ab_IsShow = '0' ");
+//			buff.append("		ORDER BY ");
+//			buff.append("			ab_Group DESC, ab_ORDER ASC ");
+//			buff.append("		))	");
+//			buff.append("WHERE ");
+//			buff.append("	RNO BETWEEN ? AND ? ");
+			buff.append("SELECT ");
+			buff.append("	* ");
+			buff.append("FROM ");
+			buff.append("	(SELECT ");
+			buff.append("	a.*, ");
+			buff.append("	ROW_NUMBER() OVER(ORDER BY ab_Group DESC, ab_Order ASC) AS RNUM ");
+			buff.append("FROM ");
+			buff.append("	AnBoard a ");
+			buff.append("WHERE ");
+			buff.append("	ab_IsShow = '0') ");
+			buff.append("WHERE ");
+			buff.append("	RNUM ");
+			buff.append("BETWEEN ? AND ? ");
+			break;
+		case UPDATE_HIT:
+			buff.append("UPDATE ");
+			buff.append("	AnBoard ");
+			buff.append("SET ");
+			buff.append("	ab_Hit = ab_Hit + 1 ");
+			buff.append("WHERE ");
+			buff.append("	ab_No = ? ");
+			break;
+		case SELECT_VIEW:
+			buff.append("SELECT ");
+			buff.append("	ab_NO AS NO, ");
+			buff.append("	ab_Writer AS WRITER,");
+			buff.append("	ab_Title AS TITLE, ");
+			buff.append("	ab_Body AS BODY, ");
+			buff.append("	ab_Date AS WDAY, ");
+			buff.append("	ab_Hit AS HIT, ");
+			buff.append("	ab_Good AS GOOD, ");
+			buff.append("	ab_Bad AS BAD, ");
+			buff.append("	ab_Group AS LGROUP, ");
+			buff.append("	ab_Step AS LSTEP, ");
+			buff.append("	ab_Order AS LORDER ");
+			buff.append("FROM ");
+			buff.append("	AnBoard ");
+			buff.append("WHERE ");
+			buff.append(" ab_No = ? ");
+			break;
+		case UPDATE_ORDER:
+			buff.append("UPDATE ");
+			buff.append("	AnBoard ");
+			buff.append("SET ");
+			buff.append("	ab_Order = ab_Order + 1 ");
+			buff.append("WHERE ");
+			buff.append("	ab_GROUP = ? ");
+			buff.append("	AND ");
+			buff.append("	ab_Order >= ? ");
+			break;
+		case CHECK_PASSWORD:
+			buff.append("SELECT ");
+			buff.append("	COUNT(*) AS CNT ");
+			buff.append("FROM ");
+			buff.append("	AnBoard ");
+			buff.append("WHERE ");
+			buff.append("	ab_NO = ? ");
+			buff.append("	AND ");
+			buff.append("	ab_Password = ? ");
+			break;
+		case UPDATE_BOARD:
+			buff.append("UPDATE ");
+			buff.append("	AnBoard ");
+			buff.append("SET ");
+			buff.append("	ab_Title = ?, ");
+			buff.append("	ab_Body = ? ");
+			buff.append("WHERE ");
+			buff.append("	ab_NO = ? ");
+			break;
+		case DELETE_BOARD:
+			buff.append("UPDATE ");
+			buff.append("	AnBoard ");
+			buff.append("SET ");
+			buff.append("	ab_IsShow = '1' ");
+			buff.append("WHERE ");
+			buff.append("	ab_NO = ? ");			
+			break;
+		}
+		return buff.toString();
+	}
+
+}

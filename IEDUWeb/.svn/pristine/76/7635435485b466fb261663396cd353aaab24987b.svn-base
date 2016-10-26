@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%-- JSTL 중 Core를 사용할 준비를 한다 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel=stylesheet href=../Base.css>
+<title>JSP</title>
+</head>
+<body>
+<%--	상세보기 내용을 출력하고 --%>
+	<table class="TABLESTYLE3">
+		<tr>
+			<th>번호</th>
+			<td>${DATA.no}</td>
+			<th>조회수</th>
+			<td>${DATA.hit}</td>
+		</tr>
+		<tr>
+			<th>작성자</th>
+			<td>${DATA.writer}</td>
+			<th>작성날짜</th>
+			<td>${DATA.date}</td>
+		</tr>
+		<tr>
+			<th>제목</th>
+			<td colspan="3">${DATA.title}</td>
+		</tr>
+		<tr>
+			<td colspan="4">${DATA.brbody}</td>
+		</tr>
+	</table>
+<%--	부가 기능을 만들고 --%>
+
+<%--	답글 보기를 출력하고 --%>
+
+<%--	답글 쓰기 폼을 만든다. --%>
+ 
+</body>
+</html>

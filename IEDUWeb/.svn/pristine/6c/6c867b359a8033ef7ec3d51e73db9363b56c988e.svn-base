@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+	<p id="test1"></p>
+	<p id="test2"></p>
+	<p id="test3"></p>
+	<script>
+		var name = "홍길동";
+		document.getElementById("test1").innerHTML="이름"+name;
+		name=27;
+		document.getElementById("test2").innerHTML="나이"+name;	
+		name=true;
+		document.getElementById("test3").innerHTML="성별"+name;
+
+	</script>
+ </body>
+</html>

@@ -1,0 +1,17 @@
+package com.iedu.anboard;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.iedu.common.IEDUMain;
+
+public class BoardList implements IEDUMain {
+	public String ieduExe(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 할일이 많지만 아직 데이터베이스도 없으므로...
+		// 뷰만 불러주자
+		return "../IEDU/AnBoard/BoardList.jsp";
+	}
+}

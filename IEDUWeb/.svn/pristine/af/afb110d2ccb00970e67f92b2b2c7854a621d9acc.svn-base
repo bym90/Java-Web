@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+   function getAge(age, name){
+	   confirm("당신의 나이는 = " + age + " 이름은 = " + name);
+   }
+  </script>
+
+  <input type="button" value="Click" onClick="getAge(24)"> 
+ </body>
+</html>

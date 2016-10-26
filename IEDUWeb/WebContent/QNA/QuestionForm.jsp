@@ -1,0 +1,67 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JSP</title>
+<link rel="stylesheet" href="../Base.css">
+</head>
+<script>
+	function QuestionCheck() {
+		//	무결성 검사하세요.
+		
+		//	서버에게 전달한다.
+		var	form = document.getElementById("qfrm");
+		form.action = "../QNA/QuestionProc.kim";
+		form.submit();
+	}
+</script>
+<body>
+	<%
+	// 이 글을 쓰는 사람의 정보를 알아내자.
+	// 이 글을 쓴 사람의 정보는 세션이 가지고 있다.
+	// 만약 세션이 정보가 없으면 이 글을 쓸 수 없도록 조치해야 한다.
+	String id =(String) session.getAttribute("ID");
+	String nick =(String) session.getAttribute("NICK");
+	if(id == null || id.length() ==0){
+		// 로그인을 하지 않은 사람이므로 무너가 조치가 있어야 한다.
+		response.sendRedirect("../Login/LoginForm.kim");
+	}
+	%>
+	<form method="POST" name="qfrm" id="qfrm">
+		<table class="TABLESTYLE1 W500P">
+			<tr>
+				<td>글쓴이</td>
+<%--
+	text에 value는 기본으로 나올 내용을 쓰는 속성이다.
+	
+	reatonly는 입력은 못하지만 그 내용이 서버에게 전달된다.
+	disabled 입력고 못하고 그 내용이 서버에게 전달되지 않는다.
+ --%>
+				<td>
+					<input type="text" name="writer" id="writer" value="<%=nick%>" readonly>
+				</td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td><input type="text" name="title" id="title"></td>
+			</tr>
+			<tr>
+				<td>질문내용</td>
+				<td>
+					<textarea name="body" id="body"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="Center">
+					<input class="BUTTON1" type="button" value="질문등록하기" OnClick="QuestionCheck()">
+				</td>
+				
+			</tr>
+
+		</table>
+	</form>
+</body>
+</html>

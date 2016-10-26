@@ -1,0 +1,24 @@
+package com.iedu.sql;
+
+public class FileBoardSQL {
+	public static final int GET_MAXNO = 1101;
+	public static final int INSERT_BOARD = 2101;
+	public static String getSQL(int code) {
+		StringBuffer buff = new StringBuffer();
+		switch(code) {
+			case GET_MAXNO:
+					buff.append("SELECT ");
+					buff.append("	NVL(MAX(fb_NO), 0 ) + 1 AS MAXNO ");
+					buff.append("FROM ");
+					buff.append("	 FileBoard ");
+				break;
+			case INSERT_BOARD:
+					buff.append("INSERT ");
+					buff.append("INTO ");
+					buff.append("	FileBoard ");
+					buff.append("VALUES (?,?,?,?,SYSDATE) ");										
+				break;
+		}
+		return buff.toString();
+	}
+}

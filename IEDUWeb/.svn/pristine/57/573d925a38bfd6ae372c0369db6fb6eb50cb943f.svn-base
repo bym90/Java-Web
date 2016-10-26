@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+ 	<p id="test"></p>
+	<script>
+		function getAge(){
+			// 함수는 필요하다면 반환값을 넘겨도 되고
+			// 필요하지 않으면 넘기지 않아도 된다.
+			return 10;
+		}
+
+		age = getAge();
+		document.getElementById("test").innerHTML = "당신의 나이는 " + age + "이다.";
+	</script>
+ </body>
+</html>

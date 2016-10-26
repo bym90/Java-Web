@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+	function Show(){
+	var now = new Date();
+	var day = now.getDate();
+	var result = document.getElementById("test").innerHTML = "오늘은" + day + "일 입니다";
+	}
+  </script>
+    <p id="test"></p>
+	<input type="button" value="Click" onClick="Show()">
+ </body>
+</html>

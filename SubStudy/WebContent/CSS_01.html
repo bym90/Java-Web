@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+
+<title>Insert title here</title>
+
+</head>
+<style>
+.circle {
+	background: #fff;
+	border-radius: 100%;
+	cursor: pointer;
+	width: 300px;
+	height: 300px;
+	line-height: 300px;
+	text-align: center;
+	margin:0 auto;
+	overflow: hidden;
+	transform: translateZ(0);
+}
+.circle:before, .circle:after {
+	box-sizing: border-box;
+	border-radius: 100%;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: inherit;
+	height: inherit;
+	box-shadow: 
+		inset 150px 0 0 rgba(30, 140, 209, 0.2), 
+		inset 0 150px 0 rgba(30, 140, 209, 0.2), 
+		inset -150px 0 0 rgba(30, 140, 209, 0.2), 
+		inset 0 -150px 0 rgba(30, 140, 209, 0.2);
+	transition: box-shadow 0.5s, color 0.8s;
+}
+.circle:after {
+	transform: rotate(45deg);
+}
+.circle:hover:after, .circle:hover:before {
+	box-shadow: 
+		inset 15px 0 0 rgba(255, 0, 0, 0.5), 
+		inset 0 15px 0 rgba(252, 150, 0, 0.5), 
+		inset -15px 0 0 rgba(0, 255, 0, 0.5), 
+		inset 0 -15px 0 rgba(0, 150, 255, 0.5);
+}        				
+</style>
+<body>
+
+    <div class="circle">
+		<span>Circle Effect</span>
+	</div> 
+</body>
+</html>

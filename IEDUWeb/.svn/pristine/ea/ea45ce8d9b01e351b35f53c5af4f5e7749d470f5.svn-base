@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ 
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../Base.css">
+<title>JSP</title>
+</head>
+<script>
+	// 로그인 요청을 하기전에 무결성 검사를 하기 위해서 만든 프로그램
+	function LoginCheck() {
+		var idF = document.getElementById("id");
+		var idV = idF.value;
+		if(idV.length == 0 || idV== ""){
+			alert("아이디를 입력하세요");
+			return;
+		}
+		// 나는 아이디는 영문자와 숫자만 사용하도록 할 예쩡이며
+		// 4~20자 사이의 id를 하도록 할 예정이다.
+		// 이처럼 특ㄹ정한 요건에 데이터가 맞는지를 점검하는 방식을 정규식 검사라고 한다.
+		// 처리방법
+		// 1. 정규식 검사를 할 패턴을 작성한다.
+		// 정규식 패턴 / /로 시작하고 종료한다.
+		// 그안에 필요한 패턴을 입력하면 된다.
+		var pattern = /^[a-zA-Z0-9]{4,20}$/;
+		// / 로시작하고
+		// ^ 첫글자 부터 적용한다.
+		// $ 마지막 글자까지 적용한다.
+		// [] 이 안에 사용된 내용만 적용한다.
+		// {} 글자수를 지정한다.
+		// 예> /^010-[0-9]{4}-[0-9]{4}$/
+		// 2. 내용이 이 팬터에 맞는지 확인한다.
+		// 명령 test()
+		// 올바른 패턴이면 true, 잘못된 패턴이면 false를 반환한다.
+// 		if(pattern.test(idV)){
+// 			alert("올바른 아이디 입니다.");
+// 		}
+// 		else{
+// 			alert("올바르지 않은 아이디 입니다.");
+// 		}
+		if(! pattern.test(idV)){
+			alert("아이디는 영문자와 숫자만 이용해주세요!");
+			return;
+		}
+		
+// 		var pattern2 = /^[a-zA-Z0-9~!@#$%^&*()_+|-=\;:<>,./?]{6-20}$/;
+		
+		// 비밀번호도 나름대로 규칙을 만들어서 정규식 검사를 해보세요
+		var form = document.getElementById("lfrm");
+		form.action = "../Login/LoginProc.kim";
+		form.submit();
+	}
+</script>
+<body>
+	<form method="post" id="lfrm">
+		<table class="TABLESTYLE1 W500P">
+			<tr>
+				<td>아이디</td>
+				<td>
+					<input type="text" name="id" id="id">
+				</td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td>
+					<input type="password" name="pw" id="pw">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" value="로그인" OnClick="LoginCheck()">
+				</td>
+			</tr>
+		</table>
+	</form>
+ 
+</body>
+</html>

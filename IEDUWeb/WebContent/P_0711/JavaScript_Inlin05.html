@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+	function getAge(){
+		age=24; // 함수안에서 var로 쓰면 지역변수로 정해진다.
+		setAge();
+	}
+	function setAge(){
+		document.getElementById("test").innerHTML = "당신의 나이는=" + age
+	}
+  </script>
+  <input type="button" value="Click" onClick="getAge()">
+  <p id="test"></p>
+
+ </body>
+</html>
